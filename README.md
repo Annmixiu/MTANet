@@ -2,9 +2,13 @@
 
 ## Introduction
 
-The official implementation of "[MMNET: MULTI-BAND MULTI-SCALE NETWORK FOR SINGING MELODY EXTRACTION FROM POLYPHONIC MUSIC], in ICASSP 2023
+The official implementation of "MMNET: Multi-band Multi-scale Network for Singing Melody Extraction from Polyphonic Music, in ICASSP 2023
 
 We propose a more powerful singing melody extractor named multi-band multi-scale network (MMNet) for polyphonic music. Experimental results show that our proposed MMNet achieves promising performance compared with existing state-of-the-art methods, while keeping with a small number of network parameters.
+
+<p align="center">
+<img src="fig/arch.png" align="center" alt="MMNet Architecture" width="70%"/>
+</p>
 
 ## Getting Started
 
@@ -20,3 +24,22 @@ After downloading the data, use the txt files in the data folder, and process th
 
 Refer to the file: [mmnet.py](model/mmnet.py)
 
+## Result
+
+### Prediction result
+
+The visualization illustrates that our proposed MMNet can avoid the octave errors and reduce the prediction errors of the continuous melodic frames.
+
+<p align="center">
+<img src="fig/estimation.png" align="center" alt="Estimation" width="70%"/>
+</p>
+
+### Comprehensive result
+
+The scores here are either taken from their respective papers or from the result implemented by us. Experimental results show that our proposed MMNet achieves promising performance compared with existing state-of-the-art methods.
+
+<p align="center">
+<img src="fig/estimation.png" align="center" alt="Estimation" width="70%"/>
+</p>
+
+The model code has been uploaded and the rest of code will be released soon ...
