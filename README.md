@@ -31,7 +31,7 @@ Refer to the file: [mmnet.py](model/mmnet.py)
 The visualization illustrates that our proposed MMNet can avoid the octave errors and reduce the prediction errors of the continuous melodic frames.
 
 <p align="center">
-<img src="fig/estimation.png" align="center" alt="Estimation" width="30%"/>
+<img src="fig/estimation.png" align="center" alt="Estimation" width="60%"/>
 </p>
 
 ### Comprehensive result
@@ -39,7 +39,7 @@ The visualization illustrates that our proposed MMNet can avoid the octave error
 The scores here are either taken from their respective papers or from the result implemented by us. Experimental results show that our proposed MMNet achieves promising performance compared with existing state-of-the-art methods.
 
 <p align="center">
-<img src="fig/result.png" align="center" alt="Estimation" width="70%"/>
+<img src="fig/result.png" align="center" alt="Result" width="70%"/>
 </p>
 
 The model code has been uploaded and the rest of code will be released soon ...
