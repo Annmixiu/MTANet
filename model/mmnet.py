@@ -330,6 +330,7 @@ class TFHCnet(nn.Module):
 
         output = torch.cat([output, full_output], 1)
 
+        output = self.out(output)# feature fusion
         output_pre = self._pad(output, input)
         output_pre = self.channel_down(output_pre)
 
