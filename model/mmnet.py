@@ -6,6 +6,8 @@ MMNet_construction - model
 This file contains the model_achievement
 
 """
+# MMNet
+
 import torch
 import torch.nn as nn
 import numpy as np
@@ -13,7 +15,7 @@ import torch.nn.functional as F
 
 class ACBlock(nn.Module):
     def __init__(self, in_channel, out_channel, dilation):
-        super(ACBlock, self).__init__()
+        super(ACBlock,self).__init__()
 
         self.conv2 = nn.Sequential(
             nn.BatchNorm2d(in_channel),
@@ -25,6 +27,7 @@ class ACBlock(nn.Module):
             nn.ReLU(inplace=True),
             nn.Conv2d(in_channel, out_channel,
                 kernel_size=(1, 3), stride=(1, 1), padding=(0, 2 ** dilation), dilation=(1, 2 ** dilation)))
+
 
     def forward(self, input):
 
@@ -38,8 +41,19 @@ class _DenseLayer(nn.Module):
     def __init__(self, num_input_features, growth_rate, drop_rate, memory_efficient=False, dilation=1):
         super(_DenseLayer, self).__init__()
 
+        # self.add_module('norm1', nn.BatchNorm2d(num_input_features)),
+        # self.add_module('relu1', nn.ReLU(inplace=True)),
+        # self.add_module('conv1', nn.Conv2d(num_input_features, growth_rate,
+        #                                        kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)),
+
         self.conv_block = nn.Sequential(
             ACBlock(num_input_features, growth_rate, dilation),
+            # nn.Sequential(
+            #     nn.BatchNorm2d(growth_rate),
+            #     nn.ReLU(inplace=True),
+            #     nn.Conv2d(growth_rate, growth_rate,
+            #               kernel_size=3, stride=1, padding=2 ** (dilation+1), dilation=2 ** (dilation+1),
+            #               bias=False)),
             ACBlock(growth_rate, growth_rate, dilation+1),
             nn.Sequential(
                     nn.BatchNorm2d(growth_rate),
@@ -65,11 +79,15 @@ class _DenseLayer(nn.Module):
         else:
             return x
 
-    def forward(self, input):
+    # torchscript does not yet support *args, so we overload method
+    # allowing it to take either a List[Tensor] or single Tensor
+    def forward(self, input):  # noqa: F811
         prev_features = input
+        # new_features = self.conv1(self.relu1(self.norm1(prev_features)))
 
         residual = self.conv_skip(prev_features)
         new_features = self._pad(self.conv_block(prev_features), prev_features) + residual
+
 
         if self.drop_rate > 0:
             new_features = F.dropout(new_features, p=self.drop_rate,
@@ -121,7 +139,7 @@ class Multiscale_Module(nn.Module):
                      first_channel=32,
                      first_kernel=(3, 3),
                      scale=3,
-                     kl=[(16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4)],
+                     kl=[(14, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4)],
                      drop_rate=0.1,
                      hidden=None,
                      in_size=None):
@@ -170,15 +188,23 @@ class Multiscale_Module(nn.Module):
 
     def forward(self, input):
         x0 = input
-
+        # x0 = self.first_conv(x0)
         # encoder part
         x1 = self.En1(x0)
         x_1 = self.pool1(x1)
         x2 = self.En2(x_1)
+        # x2 = self.E_att2(x2)
         x_2 = self.pool2(x2)
         x3 = self.En3(x_2)
+        # x3 = self.E_att3(x3)
         x_3 = self.pool3(x3)
+
         xy_ = self.Enter(x_3)
+        # lstm = self.lstm(xy_)
+        # xy = torch.cat([xy_, lstm], dim=1)
+        # for i in range(3):
+        #     xy_ = self.dual_rnn[i](xy_)
+        # xy_ = self.nonlinear(xy_)
 
         # decoder part
         y3 = self.up3(xy_)
@@ -235,22 +261,22 @@ class TFatten(nn.Module):
 
     def forward(self,x):
         x = self.bn(x)
-        a_t = torch.mean(x, dim=-2)  # (b,c,128)
-        a_f = torch.mean(x, dim=-1)  # (b,c,360)
+        a_t = torch.mean(x, dim=-2)#(b,c,128)
+        a_f = torch.mean(x, dim=-1)#(b,c,360)
         a_t = self.t_conv1(a_t)
         a_t = self.t_conv2(a_t)
-        a_t = a_t.unsqueeze(dim=-2)  # (b,c,1,128)
+        a_t = a_t.unsqueeze(dim=-2)#(b,c,1,128)
         a_f = self.f_conv1(a_f)
         a_f = self.f_conv2(a_f)
-        a_f = a_f.unsqueeze(dim=-1)  # (b,c,360,1)
-        a_tf = a_t * a_f  # (b,c,360,128)
+        a_f = a_f.unsqueeze(dim=-1)#(b,c,360,1)
+        a_tf = a_t * a_f#(b,c,360,128)
         x_attn = a_tf * x
-        return x_attn
+        return x_attn, a_f, a_t
 
 class TFHCnet(nn.Module):
     def __init__(self, input_channel, drop_rate=0.1):
         super(TFHCnet, self).__init__()
-        kl_low = [(16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4)]
+        kl_low = [(14, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4)]
         kl_high = [(10, 3), (10, 3), (10, 3), (10, 3), (10, 3), (10, 3), (16, 3)]
         kl_full = [(6, 2), (6, 2), (6, 2), (6, 4), (6, 2), (6, 2), (6, 2)]
         in_size = [31, 32, 63]
@@ -263,8 +289,7 @@ class TFHCnet(nn.Module):
                                        kl=kl_full, drop_rate=drop_rate, hidden=hidden[0], in_size=in_size[2])
         last_channel = kl_low[-1][0] + kl_full[-1][0]
         self.out = nn.Sequential(
-            TFatten(),
-            Conv(22, 32, 1))
+            TFatten())
 
         self.channel_up = nn.Sequential(
             nn.Conv2d(3, 16, 5, padding=2),
@@ -273,7 +298,7 @@ class TFHCnet(nn.Module):
             nn.SELU()
         )
         self.channel_down = nn.Sequential(
-            nn.Conv2d(32, 16, 5, padding=2),
+            nn.Conv2d(22, 16, 5, padding=2),
             nn.SELU(),
             nn.Conv2d(16, 1, 5, padding=2),
             nn.SELU()
@@ -281,19 +306,26 @@ class TFHCnet(nn.Module):
         self.bm_layer = nn.Sequential(
             nn.Conv2d(3, 16, (4, 1), stride=(4, 1)),
             nn.SELU(),
-            nn.Conv2d(16, 16, (3, 1), stride=(3, 1)),
+            nn.Conv2d(16, 16, (3, 1), stride=(3, 1)),#3
             nn.SELU(),
-            nn.Conv2d(16, 16, (6, 1), stride=(6, 1)),
+            nn.Conv2d(16, 16, (6, 1), stride=(6, 1)),#6
             nn.SELU(),
             nn.Conv2d(16, 1, (5, 1), stride=(5, 1)),
             nn.SELU()
         )
         self.bn_layer = nn.BatchNorm2d(3)
-        self.tfattn = TFatten()
         self.residual = nn.Sequential(
             nn.Conv2d(3, 1, 3, padding=1),
+            # nn.Conv2d(3, 1, 1),
             nn.BatchNorm2d(1)
         )
+        self.beta = nn.Parameter(data=torch.FloatTensor([0.5]), requires_grad=True)
+        # self.fre_down = nn.Sequential(
+        #     nn.Conv2d(720, 360, 5, padding=2),
+        #     nn.SELU(),
+        #     # nn.Conv2d(16, 32, 5, padding=2),
+        #     # nn.SELU()
+        # )
 
     def _pad(self, x, target):
         if x.shape != target.shape:
@@ -304,36 +336,63 @@ class TFHCnet(nn.Module):
             return x
 
     def forward(self, input):
+        # input_target = input
+        # torch.save(input_target.to(torch.device('cpu')), "inputTensor.pth")
+
         input = self.bn_layer(input)
         bm = input
+        # residual = self.residual(bm)
         bm = self.bm_layer(bm)  # (b,1,1,128)
 
-        low_input = input[:, :, :348, :]
-        high_input = input[:, :, -17:-1, :]
+        low_input = input[:, :, :348, :]#348
+        high_input = input[:, :, -17:-1, :]#-17
         low_input = self.channel_up(low_input)
         high_input = self.channel_up(high_input)
 
         low = self.lowNet(low_input)  # (b,16,348,t)
+        # low = self.low_out(low)
         high = self.highNet(high_input)  # (b,16,16,t)
-
-        lower = low[:, :, :344, :]  # (b,16,344,t)
-        higher = high[:, :, -12:, ]  # (b,16,12,t)
+        # high = self.high_out(high)
+        lower = low[:, :, :344, :]  # (b,16,344,t)#344
+        higher = high[:, :, 4:, ]  # (b,16,12,t)#4
 
         middle_low = low[:, :, -5:-1, :]  # (b,16,4,t)
         middle_high = high[:, :, :4, :]  # (b,16,4,t)
-        middle = 0.9 * middle_low + 0.1 * middle_high  # (b,16,4,t)
-
+        beta = self.beta
+        middle = beta * middle_low + (1 - beta) * middle_high  # (b,16,4,t)
         output = torch.cat([lower, higher, middle], 2)  # (b,16,360,t)
+        # print(output.shape)
+        # output = output.permute(0, 2, 1, 3)
+        # output = self.fre_down(output)
+        # output = output.permute(0, 2, 1, 3)
 
         full_input = self.channel_up(input)
         full_output = self.fullNet(full_input)
 
         output = torch.cat([output, full_output], 1)
 
-        output = self.out(output)# feature fusion
+        # detection = output
+        # detection = nn.Softmax(dim=-2)(detection)
+        # torch.save(detection.to(torch.device('cpu')), "frontTensor.pth")
+
+        output, a_f, a_t = self.out(output)  # output
+
+        # target = output
+        # target = nn.Softmax(dim=-2)(target)
+        # torch.save(target.to(torch.device('cpu')), "latter1Tensor.pth")
+
         output_pre = self._pad(output, input)
         output_pre = self.channel_down(output_pre)
 
+        # target = output_pre
+        # target = nn.Softmax(dim=-2)(target)
+        # torch.save(target.to(torch.device('cpu')), "latterTensor.pth")
+        #
+        # f_target = a_f
+        # f_target = nn.Softmax(dim=-2)(f_target)
+        # torch.save(f_target.to(torch.device('cpu')), "f_Tensor.pth")
+
         output_pre = torch.cat([bm, output_pre], dim=2)
         output = nn.Softmax(dim=-2)(output_pre)
+        # param_list = [beta]
         return output, output_pre
