@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The official implementation of "MMNET: Multi-band Multi-scale Network for Singing Melody Extraction from Polyphonic Music, in ICASSP 2023
+The official implementation of "MMNET: Multi-band Multi-scale Network for Singing Melody Extraction from Polyphonic Music, whose manuscript is under submission for interspeech 2023.
 
 We propose a more powerful singing melody extractor named multi-band multi-scale network (MMNet) for polyphonic music. Experimental results show that our proposed MMNet achieves promising performance compared with existing state-of-the-art methods, while keeping with a small number of network parameters.
 
@@ -42,4 +42,4 @@ The scores here are either taken from their respective papers or from the result
 <img src="fig/result.png" align="center" alt="Result" width="50%"/>
 </p>
 
-The model code has been uploaded and the rest of code will be released soon ...
+The model code has been uploaded.
