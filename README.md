@@ -22,7 +22,7 @@ After downloading the data, use the txt files in the data folder, and process th
 
 ## Model implementation
 
-Refer to the file: [mmnet.py](model/mmnet.py)
+Refer to the file: [mtanet.py](model/mtanet.py)
 
 ## Result
 
