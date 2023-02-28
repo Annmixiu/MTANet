@@ -1,12 +1,12 @@
 """
-gya@stu.xju.edu.cn
+Email is temporarily hidden due to submission requirements
 
-MMNet_construction - model
+MTANet_construction - model
 
 This file contains the model_achievement
 
 """
-# MMNet
+# MTANet
 
 import torch
 import torch.nn as nn
@@ -258,9 +258,18 @@ class TFatten(nn.Module):
             nn.Conv1d(22, 22, 3, padding=1),
             nn.Sigmoid()
         )
-
+        self.x_conv1 = nn.Sequential(
+            nn.Conv2d(22, 22, (3, 3), padding=1),
+            nn.ReLU()
+        )
+        self.x_conv2 = nn.Sequential(
+            nn.Conv2d(22, 22, (3, 3), padding=1),
+            nn.ReLU()
+        )
     def forward(self,x):
         x = self.bn(x)
+        x_hat = self.x_conv1(x)
+        x_hat = self.x_conv2(x_hat)
         a_t = torch.mean(x, dim=-2)#(b,c,128)
         a_f = torch.mean(x, dim=-1)#(b,c,360)
         a_t = self.t_conv1(a_t)
@@ -270,7 +279,7 @@ class TFatten(nn.Module):
         a_f = self.f_conv2(a_f)
         a_f = a_f.unsqueeze(dim=-1)#(b,c,360,1)
         a_tf = a_t * a_f#(b,c,360,128)
-        x_attn = a_tf * x
+        x_attn = a_tf * x_hat
         return x_attn, a_f, a_t
 
 class TFHCnet(nn.Module):
