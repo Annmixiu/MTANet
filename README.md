@@ -4,10 +4,10 @@
 
 The official implementation of "MTANET: Multi-band Time-frequency attention Network for Singing Melody Extraction from Polyphonic Music, whose manuscript is under submission for interspeech 2023.
 
-We propose a more powerful singing melody extractor named multi-band time-frequency attention network (MTANet) for polyphonic music. Experimental results show that our proposed MMNet achieves promising performance compared with existing state-of-the-art methods, while keeping with a small number of network parameters.
+We propose a more powerful singing melody extractor named multi-band time-frequency attention network (MTANet) for polyphonic music. Experimental results show that our proposed MTANet achieves promising performance compared with existing state-of-the-art methods, while keeping with a small number of network parameters.
 
 <p align="center">
-<img src="fig/arch.png" align="center" alt="MMNet Architecture" width="100%"/>
+<img src="fig/arch.png" align="center" alt="MTANet Architecture" width="100%"/>
 </p>
 
 ## Getting Started
