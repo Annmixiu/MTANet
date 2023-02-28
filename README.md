@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The official implementation of "MMNET: Multi-band Multi-scale Network for Singing Melody Extraction from Polyphonic Music, whose manuscript is under submission for interspeech 2023.
+The official implementation of "MMNET: Multi-band Time-frequency attention Network (MTANet) for Singing Melody Extraction from Polyphonic Music, whose manuscript is under submission for interspeech 2023.
 
 We propose a more powerful singing melody extractor named multi-band multi-scale network (MMNet) for polyphonic music. Experimental results show that our proposed MMNet achieves promising performance compared with existing state-of-the-art methods, while keeping with a small number of network parameters.
 
@@ -58,4 +58,6 @@ we conducted seven ablations to verify the effectiveness of each design in the p
 <img src="fig/ablution_MEDLEY DB.png" align="center" alt="ablution_MEDLEY DB" width="50%"/>
 </p>
 
-The model code has been uploaded.
+## Download the pre-trained model
+
+Refer to the file: [pre-train model](pre-train model)
