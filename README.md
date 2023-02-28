@@ -31,7 +31,7 @@ Refer to the file: [mtanet.py](model/mtanet.py)
 The visualization illustrates that our proposed MTANet can reduce the octave errors and the melody detection errors.
 
 <p align="center">
-<img src="fig/estimation.png" align="center" alt="Estimation" width="60%"/>
+<img src="fig/estimation.png" align="center" alt="estimation" width="60%"/>
 </p>
 
 ### Comprehensive result
