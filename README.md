@@ -61,3 +61,7 @@ we conducted seven ablations to verify the effectiveness of each design in the p
 ## Download the pre-trained model
 
 Refer to the contents of the folder: pre-train model
+
+## Updata
+
+Rename the MMNet to the MTANet.
