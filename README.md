@@ -23,6 +23,7 @@ After downloading the data, use the txt files in the data folder, and process th
 ## Model implementation
 
 Refer to the file: [mtanet.py](model/mtanet.py)
+The model code has been uploaded and the rest of code will be released soon ...
 
 ## Result
 
