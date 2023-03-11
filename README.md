@@ -7,7 +7,7 @@ The official implementation of "MTANET: Multi-band Time-frequency attention Netw
 We propose a more powerful singing melody extractor named multi-band time-frequency attention network (MTANet) for polyphonic music. Experimental results show that our proposed MTANet achieves promising performance compared with existing state-of-the-art methods, while keeping with a small number of network parameters.
 
 <p align="center">
-<img src="fig/arch.png" align="center" alt="MTANet Architecture" width="60%"/>
+<img src="fig/arch.png" align="center" alt="MTANet Architecture" width="80%"/>
 </p>
 
 ## Getting Started
@@ -33,10 +33,10 @@ The model code has been uploaded and the rest of code will be released soon ...
 The visualization illustrates that our proposed MTANet can reduce the octave errors and the melody detection errors.
 
 <p align="center">
-<img src="fig/estimation1.png" align="center" alt="estimation1" width="40%"/>
+<img src="fig/estimation1.png" align="center" alt="estimation1" width="50%"/>
 </p>
 <p align="center">
-<img src="fig/estimation.png" align="center" alt="estimation" width="40%"/>
+<img src="fig/estimation.png" align="center" alt="estimation" width="50%"/>
 </p>
 
 ### Comprehensive result
