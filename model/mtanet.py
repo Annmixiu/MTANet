@@ -139,7 +139,7 @@ class Multiscale_Module(nn.Module):
                      first_channel=32,
                      first_kernel=(3, 3),
                      scale=3,
-                     kl=[(14, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4)],
+                     kl=[(16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4)],
                      drop_rate=0.1,
                      hidden=None,
                      in_size=None):
@@ -187,37 +187,26 @@ class Multiscale_Module(nn.Module):
             return x
 
     def forward(self, input):
-        x0 = input
-        # x0 = self.first_conv(x0)
+        x0 = input  # (32,c,f,t)
         # encoder part
-        x1 = self.En1(x0)
-        x_1 = self.pool1(x1)
-        x2 = self.En2(x_1)
-        # x2 = self.E_att2(x2)
-        x_2 = self.pool2(x2)
-        x3 = self.En3(x_2)
-        # x3 = self.E_att3(x3)
-        x_3 = self.pool3(x3)
+        x1 = self.En1(x0)  # (b,16,f,t)
+        x_1 = self.pool1(x1)  # (b,16,f/2,t/2)
+        x2 = self.En2(x_1)  # (b,16,f/2,t/2)
+        x_2 = self.pool2(x2)  # (b,16,f/4,t/4)
+        x3 = self.En3(x_2)  # (b,16,f/4,t/4)
+        x_3 = self.pool3(x3)  # (b,16,f/8,t/8)
 
-        xy_ = self.Enter(x_3)
-        # lstm = self.lstm(xy_)
-        # xy = torch.cat([xy_, lstm], dim=1)
-        # for i in range(3):
-        #     xy_ = self.dual_rnn[i](xy_)
-        # xy_ = self.nonlinear(xy_)
+        xy_ = self.Enter(x_3)  # (b,16,f/8,t/8)
 
         # decoder part
-        y3 = self.up3(xy_)
-        y_3 = self.De3(torch.cat([self._pad(y3, x3), x3], dim=1))
-        # y_3 = self.D_att3(y_3)
-        y2 = self.up2(y_3)
-        y_2 = self.De2(torch.cat([self._pad(y2, x2), x2], dim=1))
-        # y_2 = self.D_att2(y_2)
-        y1 = self.up1(y_2)
-        y_1 = self.De1(torch.cat([self._pad(y1, x1), x1], dim=1))
-        # y_1 = self.D_att1(y_1)
+        y3 = self.up3(xy_)  # (b,16,f/4,t/4)
+        y_3 = self.De3(torch.cat([self._pad(y3, x3), x3], dim=1))  # (b,32,f/4,t/4) to (b,16,f/4,t/4)
+        y2 = self.up2(y_3)  # (b,16,f/2,t/2)
+        y_2 = self.De2(torch.cat([self._pad(y2, x2), x2], dim=1))  # (b,32,f/2,t/2) to (b,16,f/2,t/2)
+        y1 = self.up1(y_2)  # (b,16,f,t)
+        y_1 = self.De1(torch.cat([self._pad(y1, x1), x1], dim=1))  # (b,32,f,t) to (b,16,f,t)
 
-        output = self._pad(y_1, input)
+        output = self._pad(y_1, input)  # (b,16,f,t)
         return output
 
 class Conv(nn.Module):
