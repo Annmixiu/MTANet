@@ -15,7 +15,7 @@ We propose a more powerful singing melody extractor named multi-band time-freque
 (i) Due to the author's mistake, Figure 3 in the manuscript of the paper shows an earlier version, which may cause some misunderstandings for reviewers and readers. I am very sorry for this situation! The following picture is the revised version for reference and I will make formal corrections in the subsequent manuscript.
 
 <p align="center">
-<img src="fig/Figure3.png" align="center" alt="Hourglass sub-network" width="85%"/>
+<img src="fig/Figure3.png" align="center" alt="Hourglass sub-network" width="86%"/>
 </p>
 
 (ii) Rename the MMNet to the MTANet.
