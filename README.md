@@ -20,6 +20,8 @@ We propose a more powerful singing melody extractor named multi-band time-freque
 
 (ii) Rename the MMNet to the MTANet.
 
+The author has contacted the chairs and applied for modification. If the modification is successful, please ignore the above update. I am very sorry for the inconvenience to the reviewers and readers.
+
 ## Getting Started
 
 ### Download Datasets
