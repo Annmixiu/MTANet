@@ -38,7 +38,7 @@ After downloading the data, use the txt files in the data folder, and process th
 
 Refer to the file: [mtanet.py](model/mtanet.py)
 
-The model code has been uploaded and the rest of code will be released soon ...
+The model code has been uploaded and the rest of the code will be made public after the article is accepted ...
 
 ## Result
 
