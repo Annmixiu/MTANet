@@ -58,7 +58,7 @@ The visualization illustrates that our proposed MTANet can reduce the octave err
 The scores here are either taken from their respective papers or from the result implemented by us. Experimental results show that our proposed MTANet achieves promising performance compared with existing state-of-the-art methods.
 
 <p align="center">
-<img src="fig/result.png" align="center" alt="Result" width="50%"/>
+<img src="fig/esult.png" align="center" alt="Result" width="50%"/>
 </p>
 
 ### Ablation study result
