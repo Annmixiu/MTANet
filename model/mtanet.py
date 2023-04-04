@@ -358,7 +358,7 @@ class TFHCnet(nn.Module):
         middle_high = high[:, :, :4, :]  # (b,16,4,t)
         beta = self.beta
         middle = beta * middle_low + (1 - beta) * middle_high  # (b,16,4,t)
-        output = torch.cat([lower, higher, middle], 2)  # (b,16,360,t)
+        output = torch.cat([lower, middle, higher], 2)  # (b,16,360,t)
         # print(output.shape)
         # output = output.permute(0, 2, 1, 3)
         # output = self.fre_down(output)
