@@ -89,6 +89,6 @@ Refer to the contents of the folder: pre-train model
 
 ## Special thanks
 
-*Knut(Ke) Chen(https://github.com/RetroCirce)
+* Knut(Ke) Chen(https://github.com/RetroCirce)
 
-*Shuai Yu(https://github.com/yushuai)
+* Shuai Yu(https://github.com/yushuai)
