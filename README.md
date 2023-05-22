@@ -11,7 +11,7 @@ We propose a more powerful singing melody extractor named multi-band time-freque
 </p>
 
 ## Important updata
-### 2023. 03. 20
+### 2023. 03. 19
 
 (i) Due to the author's mistake, Figure 3 in the manuscript of the paper shows an earlier version, which may cause some misunderstandings for reviewers and readers. I am very sorry for this situation! The following picture is the revised version for reference and I will make formal corrections in the subsequent manuscript.
 
@@ -21,9 +21,13 @@ We propose a more powerful singing melody extractor named multi-band time-freque
 
 (ii) Rename the MMNet to the MTANet.
 
-### Latest status
+### 2023. 03. 20
 
 The author has contacted the chairs and applied for modification. If the modification is successful, please ignore the above update. I am very sorry for the inconvenience to the reviewers and readers.
+
+### 2023. 05. 20
+The Paper has been accepted by INTERSPEECH 2023 and the official version awaits the official release.
+The rest of the code will be sorted out and published in the near future.
 
 ## Getting Started
 
