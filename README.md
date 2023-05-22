@@ -27,6 +27,7 @@ The author has contacted the chairs and applied for modification. If the modific
 
 ### 2023. 05. 20
 The Paper has been accepted by INTERSPEECH 2023 and the official version awaits the official release.
+
 The rest of the code will be sorted out and published soon.
 
 ## Getting Started
@@ -89,4 +90,5 @@ Refer to the contents of the folder: pre-train model
 ## Special thanks
 
 *Knut(Ke) Chen(https://github.com/RetroCirce)
+
 *Shuai Yu(https://github.com/yushuai)
