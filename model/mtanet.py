@@ -1,5 +1,5 @@
 """
-Email is temporarily hidden due to submission requirements
+gya@stu.xju.edu.cn
 
 MTANet_construction - model
 
