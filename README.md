@@ -31,7 +31,7 @@ The Paper has been accepted by INTERSPEECH 2023 and the official version awaits 
 The rest of the code will be sorted out and published soon.
 
 ### 2023. 06. 11
-All the code is uploaded
+All the code is uploaded.
 
 ## Getting Started
 
