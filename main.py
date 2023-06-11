@@ -167,4 +167,4 @@ if __name__ == "__main__":
         train()
     elif args.mode == "test":
         test()
-train()
+train()  # for debugging, please comment if you want to run it in a terminal like Xshell
