@@ -30,6 +30,9 @@ The Paper has been accepted by INTERSPEECH 2023 and the official version awaits 
 
 The rest of the code will be sorted out and published soon.
 
+### 2023. 06. 11
+All the code is uploaded
+
 ## Getting Started
 
 ### Download Datasets
@@ -39,12 +42,13 @@ The rest of the code will be sorted out and published soon.
 * [MedleyDB](https://medleydb.weebly.com/)
 
 After downloading the data, use the txt files in the data folder, and process the CFP feature by [feature_extraction.py](feature_extraction.py).
+Note that the label data corresponding to the frame shift should be available before generation.
 
 ## Model implementation
 
 Refer to the file: [mtanet.py](model/mtanet.py)
 
-The model code has been uploaded and the rest of the code will be made public after the article is accepted ...
+The replication code for other comparison models has been uploaded and can be found in the folder: [111](model/mtanet.py)
 
 ## Result
 
