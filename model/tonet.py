@@ -1,9 +1,9 @@
 """
 Add comments and rewrite on the basis of Ke Chen knutchen@ucsd.edu
 
-Several contrast models require TONet calls
-
-This file contains the train/valid and test
+This file contains:
+A. the train/valid and test
+B. tonet-decoder
 
 """
 
