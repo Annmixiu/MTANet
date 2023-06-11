@@ -202,8 +202,8 @@ class TONet(pl.LightningModule):
             feature_agg = feature_agg.squeeze(dim=1)#[bs,720,128]
             # print("this is the feature",feature_agg.shape)
             feature_agg_mi = self.tcfp_linear(feature_agg)  # [bs, 360, 128]
-            # 与文章中不同的一点，这里2F又做了线性变换，所以后面通过线性层后才传入最后特征融合的模块
-            # 特征维度=[bs, 360, 128],但传入decoder的还是[bs,720,128]
+            # One difference from the paper: 2F is transformed again, so after passing through the linear layer, it is passed to the final feature fusion module
+            # [bs, 360, 128],decoder input: [bs,720,128]
             bm_agg = torch.cat((bm_l, bm_r), dim=2)#[bs,1,2,128]
             bm_agg = bm_agg.squeeze(dim=1)#[bs,2,128]
             bm_agg_mi = self.tcfp_bm(bm_agg)#[bs,1,128]
