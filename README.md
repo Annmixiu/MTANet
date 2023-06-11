@@ -90,7 +90,7 @@ we conducted seven ablations to verify the effectiveness of each design in the p
 
 ## Download the pre-trained model
 
-Refer to the contents of the folder: pre-train model
+Refer to the contents of the folder: [pre-train model(pre-train%20model).
 
 ## Special thanks
 
