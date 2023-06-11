@@ -48,7 +48,7 @@ class TONet(pl.LightningModule):
             assert r_model is not None, "Enabling TONet needs two-branch models!"
 
         self.gru_dim = 512
-        self.attn_dim = 2048#原先是2048
+        self.attn_dim = 2048
         # define hyperparameter
         if self.mode == "tcfp":
             self.sp_dim = self.config.freq_bin * 2
@@ -127,8 +127,9 @@ class TONet(pl.LightningModule):
                 nn.SELU()
             )
             # [bs, 361 + 13 + 9, 128]
+            # Consider the frequency dimension as C, and add it as conv1D along the time dimension
             self.tcfp_linear = nn.Sequential(
-                nn.Conv1d(self.config.freq_bin * 2, self.config.freq_bin,#将频率维度看做C，沿时间维度作conv1D后叠加
+                nn.Conv1d(self.config.freq_bin * 2, self.config.freq_bin,
                           5, padding=2),
                 nn.SELU()
             )
@@ -202,7 +203,8 @@ class TONet(pl.LightningModule):
             feature_agg = feature_agg.squeeze(dim=1)#[bs,720,128]
             # print("this is the feature",feature_agg.shape)
             feature_agg_mi = self.tcfp_linear(feature_agg)  # [bs, 360, 128]
-            # One difference from the paper: 2F is transformed again, so after passing through the linear layer, it is passed to the final feature fusion module
+            # One difference from the paper: 2F is transformed again,
+            # so after passing through the linear layer, it is passed to the final feature fusion module
             # [bs, 360, 128],decoder input: [bs,720,128]
             bm_agg = torch.cat((bm_l, bm_r), dim=2)#[bs,1,2,128]
             bm_agg = bm_agg.squeeze(dim=1)#[bs,2,128]
