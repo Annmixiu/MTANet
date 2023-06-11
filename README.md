@@ -48,7 +48,7 @@ Note that the label data corresponding to the frame shift should be available be
 
 Refer to the file: [mtanet.py](model/mtanet.py)
 
-The replication code for other comparison models has been uploaded and can be found in the folder: [others](model/control group model)
+The replication code for other comparison models has been uploaded and can be found in the folder: [others](model/control group model).
 
 ## Result
 
