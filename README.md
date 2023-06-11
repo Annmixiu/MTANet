@@ -42,8 +42,10 @@ All the code is uploaded
 * [MedleyDB](https://medleydb.weebly.com/)
 
 After downloading the data, use the txt files in the data folder, and process the CFP feature by [feature_extraction.py](feature_extraction.py).
+
 Note that the label data corresponding to the frame shift should be available before generation.
 
+main.py is the main function of this project.
 ## Model implementation
 
 Refer to the file: [mtanet.py](model/mtanet.py)
