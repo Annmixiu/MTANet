@@ -271,9 +271,9 @@ class TFatten(nn.Module):
         x_attn = a_tf * x_hat
         return x_attn, a_f, a_t
 
-class TFHCnet(nn.Module):
+class MTAnet(nn.Module):
     def __init__(self, input_channel, drop_rate=0.1):
-        super(TFHCnet, self).__init__()
+        super(MTAnet, self).__init__()
         kl_low = [(14, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4), (16, 4)]
         kl_high = [(10, 3), (10, 3), (10, 3), (10, 3), (10, 3), (10, 3), (16, 3)]
         kl_full = [(6, 2), (6, 2), (6, 2), (6, 4), (6, 2), (6, 2), (6, 2)]
