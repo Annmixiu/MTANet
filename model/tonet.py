@@ -1,5 +1,6 @@
 """
 Add comments and rewrite on the basis of Ke Chen knutchen@ucsd.edu
+As a model for comparison
 
 This file contains:
 A. the train/valid and test
