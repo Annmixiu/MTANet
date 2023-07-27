@@ -76,7 +76,7 @@ The scores here are either taken from their respective papers or from the result
 
 ### Ablation study result
 
-we conducted seven ablations to verify the effectiveness of each design in the proposed network. Due to the page limit, we selected the ADC2004 dataset for ablation study in the paper. More detailed results are presented here.
+We conducted seven ablations to verify the effectiveness of each design in the proposed network. Due to the page limit, we selected the ADC2004 dataset for ablation study in the paper. More detailed results are presented here.
 
 <p align="center">
 <img src="fig/ablution_ADC2004.png" align="center" alt="ablution_ADC2004" width="50%"/>
