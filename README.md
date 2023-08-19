@@ -33,6 +33,11 @@ The rest of the code will be sorted out and published soon.
 ### 2023. 06. 11
 All the code is uploaded.
 
+### 2023. 08. 19
+When I read back the paper, I found a mistake witch is one of the dimension tracking descriptions in Figure 4. Specifically, the dimensions after concatenate operation are different for different stages. For example, the input feature size in the first MFA module is (B, 32, F, T), so the feature size after concatenate operation should be (B, 32+4*16, F, T). The difference is that the feature size after concatenate operation in the subsequent MFA modules is (B, 16+4*16, F, T) (i.e., B, (N+1)C, F, T).
+
+Although the original intention is to facilitate understanding and reading, but ignored the strict relationship between the paper and the code. Since the paper can no longer be modified, it is very sorry for the troubles that bring readers here.
+
 ## Getting Started
 
 ### Download Datasets
