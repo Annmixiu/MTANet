@@ -104,3 +104,15 @@ Refer to the contents of the folder: [pre-train model](pre-train%20model).
 * [Knut(Ke) Chen](https://github.com/RetroCirce)
 
 * [Shuai Yu](https://github.com/yushuai)
+
+## Citing 
+```
+@inproceedings{gao23i_interspeech,
+  author={Yuan Gao and Ying Hu and Liusong Wang and Hao Huang and Liang He},
+  title={{MTANet: Multi-band Time-frequency Attention Network for Singing Melody Extraction from Polyphonic Music}},
+  year=2023,
+  booktitle={Proc. INTERSPEECH 2023},
+  pages={5396--5400},
+  doi={10.21437/Interspeech.2023-2494}
+}
+```
