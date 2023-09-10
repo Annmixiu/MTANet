@@ -79,6 +79,8 @@ The scores here are either taken from their respective papers or from the result
 <img src="fig/Result.png" align="center" alt="Result" width="50%"/>
 </p>
 
+* Correction：Number of parameters for TONet from 214M to 147M.
+
 ### Ablation study result
 
 We conducted seven ablations to verify the effectiveness of each design in the proposed network. Due to the page limit, we selected the ADC2004 dataset for ablation study in the paper. More detailed results are presented here.
