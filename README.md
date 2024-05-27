@@ -97,10 +97,6 @@ We conducted seven ablations to verify the effectiveness of each design in the p
 <img src="fig/ablution_MEDLEY DB.png" align="center" alt="ablution_MEDLEY DB" width="50%"/>
 </p>
 
-## Download the pre-trained model
-
-Refer to the contents of the folder: [pre-train model](pre-train%20model).
-
 ## Special thanks
 
 * [Knut(Ke) Chen](https://github.com/RetroCirce)
